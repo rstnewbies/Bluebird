@@ -2,24 +2,19 @@
 <html>
   <head>
     <meta charset="utf-8" http-equiv="content-type" name="viewport" content="width=device-width, initial-scale=1">  
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <style>
+.auto{display:block;border: 2px solid black;padding:5px;margin-top:5px;width:1000px;height:400px;overflow:auto;	}
   * { margin: 0; padding: 0; box-sizing: border-box;}
-
-      body { font: 16px Helvetica, Arial; background-color : 600#5E35B1
-;}
-	  
-      form { background: #000; padding: 3px; position: fixed; bottom: 0; background-color: 600#3949AB
-; }
-	  
+      body { font: 16px Helvetica, Arial; background-color : 600#5E35B1;}  
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; background-color: 600#3949AB; }
       form input { border: 0; padding: 10px; width: 100%;  margin-right: .5%; background-color : #ff9900; }
 	  
       #messages { list-style-type: none; margin: 0; padding: 0; color: white;}
 	  
-      #messages li { padding: 5px 10px; background-color: #ff9900;}
+      #messages li { border-radius: 9px; padding: 5px 10px; background-color: #ff9900;}
 	  
       #messages li:nth-child(odd) { background: #eee;  background-color: #339966;} 
 	  </style>
@@ -33,7 +28,7 @@
                 <h1>Bluebird</h1>
             </div>
         </div>
-        <div class="row">
+        <div class="row auto">
             <ul id="messages" ></ul>
         </div>
         <div class="row">
@@ -47,7 +42,6 @@
                     </div>
                  </form>    
         </div>    
-    
         <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
         <script>
