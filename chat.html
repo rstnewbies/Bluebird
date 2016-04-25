@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" http-equiv="content-type" name="viewport" content="width=device-width, initial-scale=1">  
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <style>
+      body { font: 16px Helvetica, Arial; background-color:#424242;}  
+	  
+      .auto{display:block; border: 2px solid #212121; padding:5px; margin-top:5px; position:relative; height:400px; width:auto; overflow:auto; background-color:#616161}
+	  
+      * { margin: 0; padding: 0; box-sizing: border-box;}
+	  
+      .down{position: relative; bottom: 0px; max-width:500px; }
+	  
+      form { background: #616161; padding: 3px;position: fixed; bottom: 0;width:73%;}
+	  
+      form input {border: 0; padding: 10px; margin-right: .5%; background-color : #0277BD;}
+	  
+      #messages { list-style-type: none; margin: 0; padding: 0; color: white;}
+	
+      #messages li { border-radius: 9px; padding: 5px 10px; background-color: #039BE5;}
+	  
+      #messages li:nth-child(odd) { background: #eee;  background-color: #29B6F6;} 
+	  
+	  .logo{ color:#0033ff;}	  
+	  </style> 
+  </head> 
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-ms4 logo">
+				<img src = "img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
+            </div>
+        </div>
+        <div class="row auto">
+            <ul id="messages" ></ul>
+        </div>
+        <div class=" row down">
+                <form action ="">       			
+					<input class = "col-md-11" id="m" autocomplete="off" /> 
+					<button class = "btn btn-lg btn-primary">Send</button>
+                 </form>    
+		</div>         
+        <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+        <script>
+          var socket = io();
+          $('form').submit(function(){
+            socket.emit('chat message', $('#m').val());
+            $('#m').val('');
+            return false;
+          });
+          socket.on('chat message', function(msg){
+            $('#messages').append($('<li>').text(msg));
+          });
+        </script>
+    </div>
+  </body>
+</html>
