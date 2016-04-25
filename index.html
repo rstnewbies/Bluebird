@@ -33,7 +33,7 @@
     <div class="container">
         <div class="row">
             <div class="col-ms4 logo">
-				<img src = "img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
+				<img src = "http://localhost:3000/img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
             </div>
         </div>
         <div class="row auto">
@@ -45,7 +45,14 @@
 					<button class = "btn btn-lg btn-primary">Send</button>
                  </form>    
 		</div>    
-        
+        <div class = "generateid">
+			<h3 style = "color: blue"> Unikalne id : 
+				<script>
+					var id = "user" + Math.random().toString(8).slice(15)
+					document.write(id);
+				</script>
+			</h3>
+		</div>
         <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
         <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
         <script>
