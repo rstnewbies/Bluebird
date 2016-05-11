@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Bluebird</title>
+    <meta charset="utf-8" http-equiv="content-type" name="viewport" content="width=device-width, initial-scale=1">  
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	</head>
+	<style>
+	body { font: 16px Helvetica, Arial; background-color:#424242;}
+	.container {margin-top: 15%;}
+	.panel-heading {padding-rigth: 42%; padding-left: 42%;}
+	.panel-body {padding-rigth: 42%; padding-left: 37%;}
+	</style>
+	<body>
+	<div class="container">
+		<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">Tworzenie pokoju</h3>
+				</div>
+			<div class="panel-body">
+			<form action="#" method="post">
+	<table>
+		<tr>
+			<td>Nazwa pokoju</td>
+			<td>
+				<input type="textbox" name="name" value="" size="20" maxlength="12" />
+			</td>
+		</tr>
+		<tr>
+			<td>Ilość użytkowników</td>
+			<td>
+				<select name="limit">
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5" selected="selected">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+											<option value="10">10</option>
+									</select> użytkowników			</td>
+		</tr>
+        <br>   
+		   <tr>
+					
+            <td>Język</td>
+            <td>
+                <select name="language">
+                                            <option value="en">English</option>
+                                            <option value="ja">日本語</option>
+											<option value="de">Deutsch</option>
+                                            <option value="ru">Русский</option>
+                                            <option value="it">Italiano</option>
+                                            <option value="pl" selected="selected">Polski</option>
+                                            <option value="fr">Français</option>
+                                    </select>
+            </td>
+        </tr>
+				<tr>
+			<td></td>
+			<td>
+			<br>
+				<span class="button">
+					<input type="submit" name="submit" value="Stwórz!" class="input" />
+				</span>
+			</td>
+		</tr>
+	</table>
+    </form>
+	</div>
+	</div>
+	</div>	
+	</body>
+	</html>
