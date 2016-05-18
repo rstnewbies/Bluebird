@@ -52,10 +52,6 @@
         <script>
           var socket = io();
           
-	socket.configure(function () { 
-	  socket.set("transports", ["xhr-polling"]); 
-	  socket.set("polling duration", 20); 
-	});
 
 		  var id = "user" + Math.random().toString(8).slice(15);
           $('form').submit(function(){
