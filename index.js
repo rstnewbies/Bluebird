@@ -6,9 +6,9 @@ var app = require('express')();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-var io = require('socket.io')(http);
+/*var io = require('socket.io')(http);
 io.set('transports', ['xhr-polling']);
-io.set('polling duration', 10);
+io.set('polling duration', 10);*/
 
 app.set('port', (process.env.PORT || 5000));
 
