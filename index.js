@@ -2,9 +2,8 @@
 var app = express();
 var http = require('http').createServer(app);
 */
-var app = require('http').createServer(handler)
+var app = require('express').createServer();
 var io = require('socket.io')(app);
-
 
 var io = require('socket.io')(http);
 io.set('transports', ['xhr-polling']);
