@@ -2,8 +2,9 @@
 var app = express();
 var http = require('http').createServer(app);
 */
-var app = require('express').createServer();
-var io = require('socket.io')(app);
+var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
 
 var io = require('socket.io')(http);
 io.set('transports', ['xhr-polling']);
@@ -25,7 +26,7 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
 });
-app.listen(app.get('port'), function() {
+server.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
 });
 
