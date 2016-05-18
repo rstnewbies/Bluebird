@@ -1,6 +1,9 @@
-var express = require('express');
+/*var express = require('express');
 var app = express();
 var http = require('http').createServer(app);
+*/
+var app = require('http').createServer(handler)
+var io = require('socket.io')(app);
 
 
 var io = require('socket.io')(http);
