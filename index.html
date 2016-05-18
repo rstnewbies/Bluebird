@@ -50,7 +50,12 @@
 		</div>    
        
         <script>
-          var socket = io();
+          var socket = io({
+		  transports: [
+		    'xhr-polling', 
+		  ],
+		  'polling duration' : 10
+		});
           
 
 		  var id = "user" + Math.random().toString(8).slice(15);
