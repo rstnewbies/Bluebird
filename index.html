@@ -51,6 +51,10 @@
        
         <script>
           var socket = io();
+          
+	socket.set('transports', ['xhr-polling']);
+	socket.set('polling duration', 10);
+
 		  var id = "user" + Math.random().toString(8).slice(15);
           $('form').submit(function(){
          socket.emit('chat message', {id: id, message: $('#m').val()});
