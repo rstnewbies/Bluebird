@@ -38,7 +38,7 @@
 				<img src = "http://localhost:3000/img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
             </div>
         </div>
-        <div class="row auto messages-scroll">
+        <div class="row auto messages-scroll" id="chat-wrapper">
 			<ul id="messages" >
 			</ul>
         </div>
@@ -66,6 +66,8 @@
           });
           socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg.id + " " + msg.message))
+          	var objDiv = document.getElementById("chat-wrapper");
+		objDiv.scrollTop = objDiv.scrollHeight;
 		  $(".auto").scrollTop($(".messages-scroll").scrollHeight)
           });
 		  
