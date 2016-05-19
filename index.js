@@ -21,7 +21,6 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', function(request, response) {
   response.sendFile(__dirname + '/index.html');
-   response.sendFile(__dirname + '/public');
 });
 io.on('connection', function(socket){
   socket.on('chat message', function(msg){
