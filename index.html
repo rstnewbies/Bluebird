@@ -11,66 +11,83 @@
   <style>
       body { font: 16px Helvetica, Arial; background-color:#424242;}  
 	  
-      .auto{border: 2px solid #212121; padding:5px; margin-top:5px; position:relative; height:400px; width:auto; overflow:auto; background-color:#616161}
+      .auto{border: 2px solid #212121; padding:5px; margin-top:5px; position: relative; height:500px; width:auto; overflow:auto; background-color:#616161}
 	  
       * { margin: 0; padding: 0; box-sizing: border-box;}
 	  
-      .down{position: relative; bottom: 0px; max-width:500px; }
-	  
-      form { background: #616161; padding: 3px;position: fixed; bottom: 0;width:73%;}
-	  
-      form input {border: 0; padding: 10px; margin-right: .5%; background-color : #0277BD;}
+      .down{ background: #616161; padding: 3px;position: fixed; bottom: 0;width:73%;}
 	  
       #messages { list-style-type: none; margin: 0; padding: 0; color: white;}
-      #messages li { border-radius: 9px; padding: 5px 10px; background-color: #29B6F6; border: 1px solid #212121;}
+	  
+      #messages li { border-radius: 9px; padding: 5px; background-color: #29B6F6; border: 1px solid #212121;}
 	  
       #messages li:nth-child(odd) { background: #eee;  background-color: #29B6F6;} 
 	  
 	  .logo{ color:#0033ff;}
 	  
+	  .nickchange{border: 2px solid #212121; float: left; width : 150px; height: 200px; margin-left: 20px; margin-top: 20px; color: red;}
+	  
+	  .nicktext {background-color: white;}
+	  
+	  .nickmessage {border: 1px solid #212121;}
+	  
+	  .messageinput {border: 0; padding: 10px; margin-right: .5%; background-color : #0277BD;}
+	  
+	  .nickchangeinput {border-radius: 5px; width: 140px; margin-left: 3px; color: black;}
+	  
+	  .nickchangebutton {width : 100px; margin-left : 15px;}
 	  </style>
   </head>
   
   <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-ms4 logo">
-				<img src = "http://localhost:5000/img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
-            </div>
-        </div>
-        <div class="row auto messages-scroll" id="chat-wrapper">
+	<div class = "col-ms-4 nickchange">
+		<p align = "center" > Wpisz swój nick </p>
+			<form action>
+				<input type="text" name="nickchange" id = "nick" class = "nickchangeinput" />
+			</form>
+		<button class= "btn btn-success nickchangebutton" onclick="nickchange()"> Zmien </div>
+	</div>
+    <div class = "container">
+				<div class="col-ms4 logo">
+					<img src = "http://localhost:5000/img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
+				</div>
+			<div class="row auto messages-scroll">
 			<ul id="messages" >
 			</ul>
         </div>
-        <div class=" row down">
+        <div class="row down">
                 <form action ="">       			
-					<input class = "col-md-11" id="m" autocomplete="off" /> 
+					<input class = "col-md-11 messageinput" id="m" autocomplete="off" /> 
 					<button class = "btn btn-lg btn-primary">Send</button>
                  </form>    
 		</div>    
        
         <script>
           var socket = io({
-		  transports: [
-		    'polling', 
-		  ],
-		  'polling duration' : 10
-		});
-          
-
-		  var id = "user" + Math.random().toString(8).slice(15);
+				transports: [
+					'polling', 
+					],
+				'polling duration' : 10
+			});
+		    var id = "user" + guid();
+			function guid() {
+				function s4() {
+					return Math.floor((Math.random()) * 0x10000)
+				}
+				return s4() + s4();
+			}
           $('form').submit(function(){
-         socket.emit('chat message', {id: id, message: $('#m').val()});
+          socket.emit('chat message', {id: id, message: $('#m').val()});
           $('#m').val('');
           return false;
           });
+         function nickchange(){
+            id = $('#nick').val();
+           };
           socket.on('chat message', function(msg){
           $('#messages').append($('<li>').text(msg.id + " " + msg.message))
-          	var objDiv = document.getElementById("chat-wrapper");
-		objDiv.scrollTop = objDiv.scrollHeight;
 		  $(".auto").scrollTop($(".messages-scroll").scrollHeight)
           });
-		  
 			</script>
         </script>
     </div>
