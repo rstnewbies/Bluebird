@@ -45,7 +45,7 @@
 			<form action>
 				<input type="text" name="nickchange" id = "nick" class = "nickchangeinput" />
 			</form>
-		<button class= "btn btn-success nickchangebutton" onclick="nickchange()"> Zmien </div>
+		<button class= "btn btn-success nickchangebutton"> Zmien </div>
 	</div>
     <div class = "container">
 				<div class="col-ms4 logo">
@@ -81,12 +81,12 @@
           $('#m').val('');
           return false;
           });
-         function nickchange(){
-            id = $('#nick').val();
-           };
+		  $('.nickchangebutton').on('click', function(){
+		  id = $('#nick').val();
+		  })
           socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').text(msg.id + " " + msg.message))
-		  $(".auto").scrollTop($(".messages-scroll").scrollHeight)
+          $('#messages').append($('<li>').html('<b>'+msg.id + "</b> " + msg.message))
+    $(".auto").scrollTop($(".messages-scroll").scrollHeight)
           });
 			</script>
         </script>
