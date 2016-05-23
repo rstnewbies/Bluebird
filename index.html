@@ -76,9 +76,6 @@
 					],
 				'polling duration' : 10
 			});
-	socket.on('connection', function(socket){
-$('#users').append($('<li>').html(id))
-  });
 		    var id = "user" + guid();
 			function guid() {
 				function s4() {
@@ -86,9 +83,6 @@ $('#users').append($('<li>').html(id))
 				}
 				return s4() + s4();
 			}
-	 socket.on('connection', function () {
-  $('#nicks').append($('<li>').html('siema'))
-  });
           $('form').submit(function(){
           socket.emit('chat message', {id: id, message: $('#m').val()});
           $('#m').val('');
