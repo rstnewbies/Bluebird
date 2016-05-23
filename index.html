@@ -11,7 +11,7 @@
   <style>
       body { font: 16px Helvetica, Arial; background-color:#424242;}  
 	  
-      .auto{border: 2px solid #212121; padding:5px; margin-top:5px; position: relative; height:500px; width:auto; overflow:auto; background-color:#616161}
+      .auto {border: 2px solid #212121; padding:5px; margin-top:5px; position: relative; height:500px; width:auto; overflow:auto; background-color:#616161}
 	  
       * { margin: 0; padding: 0; box-sizing: border-box;}
 	  
@@ -27,6 +27,8 @@
 	  
 	  .nickchange{border: 2px solid #212121; float: left; width : 150px; height: 200px; margin-left: 20px; margin-top: 20px; color: red;}
 	  
+	  .listofusers{border: 2px solid #212121; float : right; width : 150px; height: 200px; margin-right: 20px; margin-top: 20px; color: red;}}
+	  
 	  .nicktext {background-color: white;}
 	  
 	  .nickmessage {border: 1px solid #212121;}
@@ -36,17 +38,23 @@
 	  .nickchangeinput {border-radius: 5px; width: 140px; margin-left: 3px; color: black;}
 	  
 	  .nickchangebutton {width : 100px; margin-left : 15px;}
+	  
 	  </style>
   </head>
   
   <body>
-	<div class = "col-ms-4 nickchange">
-		<p align = "center" > Wpisz swój nick </p>
-			<form action>
-				<input type="text" name="nickchange" id = "nick" class = "nickchangeinput" />
-			</form>
-		<button class= "btn btn-success nickchangebutton"> Zmien </div>
-	</div>
+		<div class = "col-ms-4 nickchange">
+			<p align = "center" > Wpisz swój nick </p>
+				<form action>
+					<input type="text" name="nickchange" id = "nick" class = "nickchangeinput" />
+				</form>
+			<button class= "btn btn-success nickchangebutton"> Zmien </button>
+		</div>
+		<!--<div class = "col-ms-4 listofusers">
+			<p align = "center" > Lista użytkowników </p>
+			<ul id="users" >
+			</ul>
+		</div>-->
     <div class = "container">
 				<div class="col-ms4 logo">
 					<img src = "http://localhost:5000/img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
@@ -61,7 +69,6 @@
 					<button class = "btn btn-lg btn-primary">Send</button>
                  </form>    
 		</div>    
-       
         <script>
           var socket = io({
 				transports: [
@@ -69,6 +76,9 @@
 					],
 				'polling duration' : 10
 			});
+	socket.on('connection', function(socket){
+$('#users').append($('<li>').html(id))
+  });
 		    var id = "user" + guid();
 			function guid() {
 				function s4() {
@@ -76,6 +86,9 @@
 				}
 				return s4() + s4();
 			}
+	 socket.on('connection', function () {
+  $('#nicks').append($('<li>').html('siema'))
+  });
           $('form').submit(function(){
           socket.emit('chat message', {id: id, message: $('#m').val()});
           $('#m').val('');
@@ -83,10 +96,10 @@
           });
 		  $('.nickchangebutton').on('click', function(){
 		  id = $('#nick').val();
-		  })
+		  });
           socket.on('chat message', function(msg){
           $('#messages').append($('<li>').html('<b>'+msg.id + "</b> " + msg.message))
-    $(".auto").scrollTop($(".messages-scroll").scrollHeight)
+		  $(".auto").scrollTop($(".messages-scroll")[0].scrollHeight)
           });
 			</script>
         </script>
