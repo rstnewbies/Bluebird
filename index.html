@@ -110,7 +110,7 @@
        * User joined chat
        */
 			socket.emit('user.joined', id );
-	   	socket.on('user joined', function(id){
+	   	socket.on('user.joined', function(id){
       	appendChatMessage("system", "<b>" + id + " joined to server. </b>");		
       });
       
