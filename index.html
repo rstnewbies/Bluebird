@@ -39,10 +39,13 @@
 	  
 	  .nickchangebutton {width : 100px; margin-left : 15px;}
 	  
+	  .type-normal { border-radius: 9px; padding: 5px; background-color: #29B6F6; border: 1px solid #212121;}
+	  .type-system {  border-radius: 9px; padding: 5px; background-color: #9900cc; border: 1px solid #212121;}
+	  
 	  </style>
   </head>
   
-  <body>
+   <body>
 		<div class = "col-ms-4 nickchange">
 			<p align = "center" > Wpisz swój nick </p>
 				<form action>
@@ -83,18 +86,57 @@
 				}
 				return s4() + s4();
 			}
-          $('form').submit(function(){
-          socket.emit('message to server', {id: id, message: $('#m').val()});
-          $('#m').val('');
+
+
+			/**
+      	* Add new message to chat
+        * @param type string normal|system
+        * @param message string
+        */
+			function appendChatMessage(type, message) {
+      		if( type != "normal" && type != "system" ) {
+          	throw "Unsported type";
+            return false;
+          }
+					var typeClass = "type-" + type;
+  
+          $('#messages').append($('<li class="'+typeClass+'">').html(message))
+		  		$(".auto").scrollTop($(".messages-scroll")[0].scrollHeight) 
+      }
+      
+      
+
+			/**
+       * User joined chat
+       */
+			socket.emit('user.joined', id );
+	   	socket.on('user joined', function(id){
+      	appendChatMessage("system", "<b>" + id + " joined to server. </b>");		
+      });
+      
+			/**
+       * Send message to server, when form is submited
+       */      
+      $('form').submit(function(){
+      		var msgg = $('#m').val();
+		  	  if (msgg.replace(/ /g,'') != '')	 {
+          	socket.emit('message to server', {id: id, message: msgg });
+		 				$('#m').val('');
+	      	}
           return false;
-          });
+      });
+      
+      
 		  $('.nickchangebutton').on('click', function(){
-		  id = $('#nick').val();
+		  	id = $('#nick').val();
 		  });
-          socket.on('message from server', function(msg){
-          $('#messages').append($('<li>').html('<b>'+msg.id + " : " + "</b> " + msg.message))
-		  $(".auto").scrollTop($(".messages-scroll")[0].scrollHeight)
-          });
+      
+      /**
+       * Receive message from server and append it to chat.
+       */
+      socket.on('message from server', function(msg){
+      	appendChatMessage("normal", "<b>"+msg.id + " : </b> " + msg.message)
+      });
 
 			</script>
         </script>
