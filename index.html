@@ -20,7 +20,7 @@
       #messages { list-style-type: none; margin: 0; padding: 0; color: white;}
 	  
       #messages li { border-radius: 9px; padding: 5px; background-color: #29B6F6; border: 1px solid #212121;}
-	  
+	  	  
       #messages li:nth-child(odd) { background: #eee;  background-color: #29B6F6;} 
 	  
 	  .logo{ color:#0033ff;}
@@ -60,7 +60,7 @@
 					<img src = "http://localhost:5000/img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
 				</div>
 			<div class="row auto messages-scroll">
-			<ul id="messages" >
+			<ul id="messages">
 			</ul>
         </div>
         <div class="row down">
@@ -84,17 +84,18 @@
 				return s4() + s4();
 			}
           $('form').submit(function(){
-          socket.emit('chat message', {id: id, message: $('#m').val()});
+          socket.emit('message to server', {id: id, message: $('#m').val()});
           $('#m').val('');
           return false;
           });
 		  $('.nickchangebutton').on('click', function(){
 		  id = $('#nick').val();
 		  });
-          socket.on('chat message', function(msg){
-          $('#messages').append($('<li>').html('<b>'+msg.id + "</b> " + msg.message))
+          socket.on('message from server', function(msg){
+          $('#messages').append($('<li>').html('<b>'+msg.id + " : " + "</b> " + msg.message))
 		  $(".auto").scrollTop($(".messages-scroll")[0].scrollHeight)
           });
+
 			</script>
         </script>
     </div>
