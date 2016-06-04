@@ -111,7 +111,11 @@
        */
 			socket.emit('user.joined', id );
 	   	socket.on('user.joined', function(id){
+<<<<<<< HEAD
       	appendChatMessage("system", "<b>" + id + " joined this room. </b>");		
+=======
+      	appendChatMessage("system", "<b>" + id + " joined to server. </b>");		
+>>>>>>> a5292def861fb408f3666b179544e02a09e25320
       });
       
 			/**
