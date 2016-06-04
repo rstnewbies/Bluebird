@@ -40,7 +40,7 @@
 	  .nickchangebutton {width : 100px; margin-left : 15px;}
 	  
 	  .type-normal { border-radius: 9px; padding: 5px; background-color: #29B6F6; border: 1px solid #212121;}
-	  .type-system {  border-radius: 9px; padding: 5px; background-color: #9900cc; border: 1px solid #212121;}
+	  .type-system {  border-radius: 9px; padding: 5px; background-color: #9900cc!important; border: 1px solid #212121;}
 	  
 	  </style>
   </head>
@@ -110,8 +110,8 @@
        * User joined chat
        */
 			socket.emit('user.joined', id );
-	   	socket.on('user joined', function(id){
-      	appendChatMessage("system", "<b>" + id + " joined to server. </b>");		
+	   	socket.on('user.joined', function(id){
+      	appendChatMessage("system", "<b>" + id + " joined this room. </b>");		
       });
       
 			/**
@@ -128,7 +128,14 @@
       
       
 		  $('.nickchangebutton').on('click', function(){
-		  	id = $('#nick').val();
+			var nick = $('#nick').val();
+		  	if (nick.replace(/ /g,'') != '') {
+				id = nick;
+				$('#nick').val('');
+	      	}	  
+			else {
+				alert("Nick nie może być pusty");
+			}
 		  });
       
       /**
