@@ -112,7 +112,6 @@
 			socket.emit('user.joined', id );
 	   	socket.on('user.joined', function(id){
       	appendChatMessage("system", "<b>" + id + " joined this room. </b>");		
-      	appendChatMessage("system", "<b>" + id + " joined to server. </b>");		
       });
       
 			/**
