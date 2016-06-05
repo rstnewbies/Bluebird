@@ -40,6 +40,7 @@
 	  .nickchangebutton {width : 100px; margin-left : 15px;}
 	  
 	  .type-normal { border-radius: 9px; padding: 5px; background-color: #29B6F6; border: 1px solid #212121;}
+	  
 	  .type-system {  border-radius: 9px; padding: 5px; background-color: #9900cc!important; border: 1px solid #212121;}
 	  
 	  </style>
@@ -113,7 +114,6 @@
 	   	socket.on('user.joined', function(id){
       	appendChatMessage("system", "<b>" + id + " joined this room. </b>");		
       });
-      
 			/**
        * Send message to server, when form is submited
        */      
@@ -125,16 +125,21 @@
 	      	}
           return false;
       });
-      
+	  
+	  
+       /**
+       * Change user id to nickname.
+       */
       
 		  $('.nickchangebutton').on('click', function(){
 			var nick = $('#nick').val();
-		  	if (nick.replace(/ /g,'') != '') {
+		  	if (nick.replace(/ /g,'') != '' && nick.match(/^[0-9a-zA-Z]{1,16}$/)) {	
+				appendChatMessage("system", "<b>"+ id + " zmienił nazwę na " + nick + " </b> ")
 				id = nick;
 				$('#nick').val('');
-	      	}	  
+			}
 			else {
-				alert("Nick nie może być pusty");
+				alert("Nieprawidłowy nick");
 			}
 		  });
       
