@@ -110,10 +110,11 @@
 			/**
        * User joined chat
        */
-			socket.emit('user.joined', id );
+		socket.emit('user.joined', id );
 	   	socket.on('user.joined', function(id){
-      	appendChatMessage("system", "<b>" + id + " joined this room. </b>");		
-      });
+		appendChatMessage("system", "<b>" + id + " joined this room. </b>");
+        });
+		
 			/**
        * Send message to server, when form is submited
        */      
@@ -131,17 +132,24 @@
        * Change user id to nickname.
        */
       
+		 var nick;
+      		socket.on('user.changeid', function(data){                    		
+              appendChatMessage("system", "<b>"+ data.id + " zmienił nazwę na " + data.nick + " </b> ")
+              id = nick;
+              $('#nick').val('');
+			});
+                                            
+                                            
+                                            
 		  $('.nickchangebutton').on('click', function(){
-			var nick = $('#nick').val();
-		  	if (nick.replace(/ /g,'') != '' && nick.match(/^[0-9a-zA-Z]{1,16}$/)) {	
-				appendChatMessage("system", "<b>"+ id + " zmienił nazwę na " + nick + " </b> ")
-				id = nick;
-				$('#nick').val('');
-			}
+		  	nick = $('#nick').val();
+			if (nick.replace(/ /g,'') != '' && nick.match(/^[0-9a-zA-Z]{1,16}$/)){
+				socket.emit('user.changeid', {id: id, nick: nick });} 
 			else {
 				alert("Nieprawidłowy nick");
 			}
-		  });
+				
+		 });
       
       /**
        * Receive message from server and append it to chat.

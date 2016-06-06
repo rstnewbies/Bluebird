@@ -15,12 +15,20 @@ io.on('connection', function(socket){
   socket.on('message to server', function(msg){
     io.emit('message from server', msg);
   });
+  
+  
   /**
    * When new user joins the chat
    */
-   socket.on('user.joined', function(id){
-    io.emit('user.joined', id);
-  });
+   socket.on('user.joined', function(data){
+    io.emit('user.joined', data);
+  })
+  /**
+   * When user change his name
+   */
+   socket.on('user.changeid', function(id){
+    io.emit('user.changeid', id);
+});
 });
 server.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
