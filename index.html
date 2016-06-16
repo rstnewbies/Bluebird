@@ -88,21 +88,26 @@
 				return s4() + s4();
 			}
 
-
 			/**
       	* Add new message to chat
         * @param type string normal|system
         * @param message string
         */
-			function appendChatMessage(type, message) {
+			function appendChatMessage(type, nick, message) {
       		if( type != "normal" && type != "system" ) {
           	throw "Unsported type";
             return false;
           }
+
 					var typeClass = "type-" + type;
   
-          $('#messages').append($('<li class="'+typeClass+'">').html(message))
-		  		$(".auto").scrollTop($(".messages-scroll")[0].scrollHeight) 
+            var li = $('<li class="'+typeClass+'"><b class="nickname"></b><span class="msg"></span></li>');
+			$('#messages').append(li);
+			li.find('.nickname').text(nick)
+			li.find('.msg').text(message)
+
+			
+		  	$(".auto").scrollTop($(".messages-scroll")[0].scrollHeight) 
       }
       
       
@@ -112,7 +117,7 @@
        */
 		socket.emit('user.joined', id );
 	   	socket.on('user.joined', function(id){
-		appendChatMessage("system", "<b>" + id + " joined this room. </b>");
+		appendChatMessage("system", id + " joined this room.");
         });
 		
 			/**
@@ -134,7 +139,7 @@
       
 		 var nick;
       		socket.on('user.changeid', function(data){                    		
-              appendChatMessage("system", "<b>"+ data.id + " zmienił nazwę na " + data.nick + " </b> ")
+                 appendChatMessage("system", data.id +  " zmienił nazwę na " + data.nick)
               id = nick;
               $('#nick').val('');
 			});
@@ -155,7 +160,7 @@
        * Receive message from server and append it to chat.
        */
       socket.on('message from server', function(msg){
-      	appendChatMessage("normal", "<b>"+msg.id + " : </b> " + msg.message)
+      	appendChatMessage("normal", msg.id + " : " + msg.message)
       });
 
 			</script>

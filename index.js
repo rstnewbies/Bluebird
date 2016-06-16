@@ -20,14 +20,14 @@ io.on('connection', function(socket){
   /**
    * When new user joins the chat
    */
-   socket.on('user.joined', function(data){
-    io.emit('user.joined', data);
+   socket.on('user.joined', function(id){
+    io.emit('user.joined', id);
   })
   /**
    * When user change his name
    */
-   socket.on('user.changeid', function(id){
-    io.emit('user.changeid', id);
+   socket.on('user.changeid', function(data){
+    io.emit('user.changeid', data);
 });
 });
 server.listen(app.get('port'), function() {
