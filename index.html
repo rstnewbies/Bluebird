@@ -11,7 +11,7 @@
   <style>
       body { font: 16px Helvetica, Arial; background-color:#424242;}  
 	  
-      .auto {border: 2px solid #212121; padding:5px; margin-top:5px; position: relative; height:500px; width:auto; overflow:auto; background-color:#616161}
+      .auto {border: 2px solid #212121; padding:5px; margin-top:5px; position: relative; height:500px;  overflow:auto; background-color:#616161}
 	  
       * { margin: 0; padding: 0; box-sizing: border-box;}
 	  
@@ -23,9 +23,9 @@
 	  	  
       #messages li:nth-child(odd) { background: #eee;  background-color: #29B6F6;} 
 	  
-	  .logo{ color:#0033ff;}
+	  .logo{ color:#0033ff; }
 	  
-	  .nickchange{border: 2px solid #212121; float: left; width : 150px; height: 200px; margin-left: 20px; margin-top: 20px; color: red;}
+	  .nickchange{border: 2px solid #212121; float: left; margin-left: 20px; margin-top: 20px; color: red;}
 	  
 	  .listofusers{border: 2px solid #212121; float : right; width : 150px; height: 200px; margin-right: 20px; margin-top: 20px; color: red;}}
 	  
@@ -33,9 +33,9 @@
 	  
 	  .nickmessage {border: 1px solid #212121;}
 	  
-	  .messageinput {border: 0; padding: 10px; margin-right: .5%; background-color : #0277BD;}
+	  .messageinput {border: 0; padding: 10px; background-color : #0277BD;}
 	  
-	  .nickchangeinput {border-radius: 5px; width: 140px; margin-left: 3px; color: black;}
+	  .nickchangeinput {border-radius: 5px; margin-left: 3px; color: black; width: 130px; background-color: #424242; border-color: black;}
 	  
 	  .nickchangebutton {width : 100px; margin-left : 15px;}
 	  
@@ -47,32 +47,51 @@
   </head>
   
    <body>
-		<div class = "col-ms-4 nickchange">
+   		<!--<div class = "col-ms-2">
 			<p align = "center" > Wpisz swój nick </p>
 				<form action>
 					<input type="text" name="nickchange" id = "nick" class = "nickchangeinput" />
 				</form>
 			<button class= "btn btn-success nickchangebutton"> Zmien </button>
 		</div>
-		<!--<div class = "col-ms-4 listofusers">
+		<div class = "col-ms-4 listofusers">
 			<p align = "center" > Lista użytkowników </p>
 			<ul id="users" >
 			</ul>
 		</div>-->
-    <div class = "container">
-				<div class="col-ms4 logo">
-					<img src = "http://localhost:5000/img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
-				</div>
-			<div class="row auto messages-scroll">
+
+	<div class = "col-sm-1 col-md-1 col-lg-1"></div>
+
+    <div class = "col-sm-10 col-md-10 col-lg-10">
+
+		<div class="col-top">
+			<img src = "http://localhost:5000/img/bluebird.png" alt="BLUEBIRD CHAT" height="50px"/>
+		</div>
+
+		<div>
+			<div class="col-sm-12 col-md-4 col-lg-4" id="helloMessage" >Welcome [nick] </div>
+			<div class="col-sm-12 col-md-8 col-lg-8" align="right">
+				<form action>
+					<input type="text" name="nickchange" id = "nick" class = "nickchangeinput" value="Change name." onfocus="(this.value ='')" />
+			<button class="btn btn-success nickchangebutton"> Zmien </button>
+			</form>
+			</div>
+		</div>
+
+		<div class="row auto messages-scroll col-sm-12 col-md-12 col-lg-12">
 			<ul id="messages">
 			</ul>
         </div>
-        <div class="col-bottom">
-                <form action ="">       			
-					<input class = "col-md-11 messageinput" id="m" autocomplete="off" /> 
-					<button class = "btn btn-lg btn-primary">Send</button>
-                 </form>    
-		</div>    
+
+        <div class="col-bottom col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px;">
+            <form action ="">
+				<input class = "col-xs-8 col-sm-10 col-md-10 col-lg-11 messageinput" id="m" autocomplete="off" />
+				<div align="left" style="margin-left: 5px;"> 
+				<button class = "btn btn-lg btn-primary">Send</button>
+				<div>
+            </form>  
+		</div>   
+
         <script>
           var socket = io({
 				transports: [
@@ -141,7 +160,7 @@
       		socket.on('user.changeid', function(data){                    		
                  appendChatMessage("system", data.id +  " zmienił nazwę na " + data.nick)
               id = nick;
-              $('#nick').val('');
+              $('#nick').val('Change name');
 			});
                                             
                                             
@@ -149,8 +168,8 @@
 		  $('.nickchangebutton').on('click', function(){
 		  	nick = $('#nick').val();
 			if (nick.replace(/ /g,'') != '' && nick.match(/^[0-9a-zA-Z]{1,16}$/)){
-				socket.emit('user.changeid', {id: id, nick: nick });} 
-			else {
+				socket.emit('user.changeid', {id: id, nick: nick });
+			} else {
 				alert("Nieprawidłowy nick");
 			}
 				
@@ -162,8 +181,6 @@
       socket.on('message from server', function(msg){
       	appendChatMessage("normal", msg.id + " : " + msg.message)
       });
-
-			</script>
         </script>
     </div>
   </body>
