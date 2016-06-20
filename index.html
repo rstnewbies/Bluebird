@@ -9,7 +9,9 @@
         <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <style>
-      body { font: 16px Helvetica, Arial; background-color:#424242;}  
+		html { height: 100%;}
+  
+      body {font: 16px Helvetica, Arial; background: rgba(0, 0, 0, 0) linear-gradient(to right bottom, #6666ff, #6699cc);}  
 	  
       .auto {border: 2px solid #212121; padding:5px; margin-top:5px; position: relative; height:500px;  overflow:auto; background-color:#616161}
 	  
@@ -31,17 +33,21 @@
 	  
 	  .nicktext {background-color: white;}
 	  
+		#nick {background-color: #0066cc;}
+	  
 	  .nickmessage {border: 1px solid #212121;}
 	  
-	  .messageinput {border: 0; padding: 10px; background-color : #0277BD;}
+	  .messageinput {border: 2px solid #212121; border-radius: 9px; padding: 10px; background-color : #0277BD;}
 	  
-	  .nickchangeinput {border-radius: 5px; margin-left: 3px; color: black; width: 130px; background-color: #424242; border-color: black;}
+	  .nickchangeinput { border-radius: 5px; margin-left: 3px; color: black; width: 130px; border-color: black;}
 	  
-	  .nickchangebutton {width : 100px; margin-left : 15px;}
+	  .nickchangebutton {border: 2px solid #212121; border-radius: 9px; width : 100px; margin-left : 15px;}
 	  
-	  .type-normal { border-radius: 9px; padding: 5px; background-color: #29B6F6; border: 1px solid #212121;}
+	  .type-normal { border-radius: 9px; padding: 15px; background-color: #29B6F6;}
 	  
-	  .type-system {  border-radius: 9px; padding: 5px; background-color: #9900cc!important; border: 1px solid #212121;}
+	  .type-system {  border-radius: 9px; padding: 5px; background-color: #9900cc!important;}
+	  
+	  .send-btn {border: 2px solid #212121; border-radius: 9px;}
 	  
 	  </style>
   </head>
@@ -69,10 +75,9 @@
 		</div>
 
 		<div>
-			<div class="col-sm-12 col-md-4 col-lg-4" id="helloMessage" >Welcome [nick] </div>
-			<div class="col-sm-12 col-md-8 col-lg-8" align="right">
+			<div class="col-sm-12 col-md-12 col-lg-12" align="right">
 				<form action>
-					<input type="text" name="nickchange" id = "nick" class = "nickchangeinput" value="Change name." onfocus="(this.value ='')" />
+					<input type="text" name="nickchange" id = "nick" class = "nickchangeinput" value="  Change name." onfocus="(this.value ='')" />
 			<button class="btn btn-success nickchangebutton"> Zmien </button>
 			</form>
 			</div>
@@ -83,11 +88,11 @@
 			</ul>
         </div>
 
-        <div class="col-bottom col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 5px;">
+        <div class="col-bottom col-xs-12 col-sm-12 col-md-12 col-lg-12 message-form" style="margin-top: 5px;">
             <form action ="">
 				<input class = "col-xs-8 col-sm-10 col-md-10 col-lg-11 messageinput" id="m" autocomplete="off" />
-				<div align="left" style="margin-left: 5px;"> 
-				<button class = "btn btn-lg btn-primary">Send</button>
+				<div align="left" style="margin-left: 10px;"> 
+				<button class = "btn btn-lg btn-primary send-btn" style="margin-left: 10px; margin-bottom: 5px;">Send</button>
 				<div>
             </form>  
 		</div>   
@@ -128,7 +133,16 @@
 			
 		  	$(".auto").scrollTop($(".messages-scroll")[0].scrollHeight) 
       }
-      
+  /*   function Actualytime(){
+		var time = new Date();
+		var hours = time.getHours();
+		if(hours<10) hours = "0" + hours;
+		var minutes = time.getMinutes();
+		if(minutes<10) minutes = "0" + minutes;
+		var seconds = time.getSeconds();
+		if(seconds<10) seconds = "0" + seconds;
+		var actuallyTime = hours + ":" + minutes + "." + seconds;
+}*/
       
 
 			/**
